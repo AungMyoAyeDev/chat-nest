@@ -3,8 +3,7 @@ import { LoginUseCase } from 'src/core/application/auth/use-case/login-use-case'
 import { AuthController } from 'src/presentation/auth/auth.controller';
 
 @Module({
-    controllers: [AuthController],
-    providers:[LoginUseCase]
+  controllers: [AuthController],
+  providers: [LoginUseCase],
 })
-export class AuthModule {
-}
+export class AuthModule {}

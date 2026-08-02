@@ -1,8 +1,8 @@
-export class ConflictException extends Error {
-    public readonly code!: string;
-    constructor(code: string, message: string) {
-        super(message);
-        this.name = 'Conflict';
-        this.code = code;
-    }
+import { HttpStatus } from '@nestjs/common';
+import { AppException } from './app-exception';
+
+export class ConflictException extends AppException {
+  constructor(code: string, message: string) {
+    super({ code, message }, HttpStatus.CONFLICT);
+  }
 }

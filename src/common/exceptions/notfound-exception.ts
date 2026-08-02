@@ -1,8 +1,8 @@
-export class NotFoundException extends Error {
-    public readonly code!: string;
-    constructor(code: string, message: string) {
-        super(message);
-        this.name = 'Resource Not Found.';
-        this.code = code;
-    }
+import { HttpStatus } from '@nestjs/common';
+import { AppException } from './app-exception';
+
+export class NotFoundException extends AppException {
+  constructor(code: string, message: string) {
+    super({ code, message }, HttpStatus.NOT_FOUND);
+  }
 }

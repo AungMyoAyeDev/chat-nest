@@ -8,20 +8,19 @@ import { RequestMiddleware } from './common/middlewares/request.middleware';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseInterceptor } from './common/interceptors/response-interceptor';
 
-
-
 @Module({
   imports: [AuthModule, UserModule, PrismaModule],
   controllers: [AppController],
-  providers: [AppService,
+  providers: [
+    AppService,
     {
       provide: APP_INTERCEPTOR,
-      useClass:ResponseInterceptor
-    }
+      useClass: ResponseInterceptor,
+    },
   ],
 })
-export class AppModule implements NestModule{
-configure(consumer: MiddlewareConsumer) {
-  consumer.apply(RequestMiddleware).forRoutes("*")
-}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(RequestMiddleware).forRoutes('*');
+  }
 }
