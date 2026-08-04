@@ -1,4 +1,3 @@
 {
-  "singleQuote": false,
-  "parser": "flow"
+  "singleQuote": false
 }

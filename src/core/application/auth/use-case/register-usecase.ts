@@ -1,8 +1,9 @@
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
-export class LoginUseCase {
+export class RegisterUsecase {
+  constructor() {}
   execute() {
-    return "exected...";
+    return "registered...";
   }
 }

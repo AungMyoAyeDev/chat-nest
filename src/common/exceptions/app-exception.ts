@@ -1,10 +1,10 @@
-import { HttpException } from '@nestjs/common';
+import { HttpException } from "@nestjs/common";
 export interface AppErrorPayload {
   code: string;
   message: string;
 }
 export class AppException extends HttpException {
-  public readonly code: string;
+  readonly code: string;
   constructor(payload: AppErrorPayload, statusCode: number) {
     super(
       {

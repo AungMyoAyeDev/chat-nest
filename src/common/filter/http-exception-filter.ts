@@ -5,14 +5,14 @@ import {
   HttpException,
   HttpStatus,
   Logger,
-} from '@nestjs/common';
-import { Request, Response } from 'express';
-import { DomainException } from '../exceptions/domain-exception';
-import { AppException } from '../exceptions/app-exception';
+} from "@nestjs/common";
+import { Request, Response } from "express";
+import { DomainException } from "../exceptions/domain-exception";
+import { AppException } from "../exceptions/app-exception";
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
-  private readonly logger = new Logger(HttpExceptionFilter.name);
+  readonly logger = new Logger(HttpExceptionFilter.name);
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const res = ctx.getResponse<Response>();
@@ -48,7 +48,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       const statusCode = exception.getStatus();
       const payload = exception.getResponse();
       const body =
-        typeof payload === 'object' && payload !== null
+        typeof payload === "object" && payload !== null
           ? (payload as Record<string, unknown>)
           : { message: payload };
 
@@ -57,18 +57,19 @@ export class HttpExceptionFilter implements ExceptionFilter {
       );
       return res.status(statusCode).json({
         success: false,
-        code: (body.code as string) ?? 'HTTP_ERROR',
+        code: (body.code as string) ?? "HTTP_ERROR",
         message: (body.message as string) ?? exception.message,
+        ...body,
       });
     }
     this.logger.error(
-      'Unhandled Exception',
+      "Unhandled Exception",
       exception instanceof Error ? exception.stack : String(exception),
     );
     return res.status(500).json({
       success: false,
-      code: 'INTERNAL_SERVER_ERROR',
-      message: 'Internal Server Error',
+      code: "INTERNAL_SERVER_ERROR",
+      message: "Internal Server Error",
     });
   }
 }
